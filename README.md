@@ -35,8 +35,9 @@ Check out the [Oxidized TREX 2014 presentation](http://youtu.be/kBQ_CTUuqeU?t=3h
     * [FreeBSD](#freebsd)
     * [Build from Git](#build-from-git)
     * [Docker & Podman](docs/Docker.md)
-3. [Initial Configuration](#configuration)
-4. [Configuration](docs/Configuration.md)
+3. [Web UI](#web-ui)
+4. [Initial Configuration](#configuration)
+5. [Configuration](docs/Configuration.md)
     * [Debugging](docs/Configuration.md#debugging)
     * [Privileged mode](docs/Configuration.md#privileged-mode)
     * [Disabling SSH exec channels](docs/Configuration.md#disabling-ssh-exec-channels)
@@ -174,6 +175,58 @@ rake install
 
 ### Running with Docker or Podman
 See [docs/Docker.md](docs/Docker.md)
+
+## Web UI
+
+Oxidized includes a modern React-based web interface located in `web/oxidized-ui/`. The web UI provides a user-friendly way to monitor and manage your network device backups.
+
+### Features
+
+The web UI includes three main sections:
+
+**Dashboard** - Overview of your backup status including total nodes, successful/failed/pending backups, backup activity charts, and recent activity table.
+
+**Nodes** - Complete node management with searchable and filterable node list, manual backup triggers, and detailed node information dialogs showing current configuration, version history, and diff comparison between versions.
+
+**Configuration** - Browse device configurations with a node selector sidebar, terminal-style configuration viewer, and the ability to trigger backups directly.
+
+### Running the Web UI
+
+1. Navigate to the web UI directory:
+```shell
+cd web/oxidized-ui
+```
+
+2. Install dependencies:
+```shell
+npm install
+```
+
+3. Configure the API URL (optional). Create a `.env` file to point to your Oxidized REST API:
+```shell
+echo "VITE_API_URL=http://localhost:8888" > .env
+```
+
+4. Start the development server:
+```shell
+npm run dev
+```
+
+The web UI will be available at `http://localhost:5173` (or the next available port).
+
+### Building for Production
+
+To build the web UI for production deployment:
+
+```shell
+npm run build
+```
+
+The built files will be in the `dist/` directory and can be served by any static file server.
+
+### API Integration
+
+The web UI is designed to work with Oxidized's REST API endpoints. Make sure your Oxidized instance has the REST API enabled in its configuration. The web UI will fall back to mock data for demonstration purposes when the API is unavailable.
 
 ## Configuration
 
